@@ -1,15 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 
 import './Task.css'
-import TaskForm from './TaskForm';
+import TaskForm from '../TaskForm/TaskForm';
+import TaskList from '../TaskList/TaskList';
 const Task = () => {
     const [isCreate, setIsCreate] = useState(false);
+  const [tasks, setTasks] = useState([])
+  const [isAdded, setIsAdded] = useState(false);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [priority, setPriority] = useState();
+  const createTask = (e) => {
+    e.preventDefault();
+
+    if (title.length === 0) {
+      alert('Please give a Title !')
+    }
+    if (description.length === 0) {
+      alert('Please give a Description !')
+    }
+    if (priority.length === 0) {
+      alert('Please give a Priority !')
+    }
+    const taskItem = {
+      
+      title,
+      description,
+      priority,
+    }
+    const taskData = tasks;
+    taskData.push(taskItem);
+    setTasks(taskData)
+    setIsAdded(true)
+    setTitle('')
+    setDescription('')
+    setPriority('')
+  }
+  useEffect(() => {
+    // const data = [
+    //   {
+    //     id: 1,
+    //     title: "First Title",
+    //     description: "Test Description",
+    //     priority: "High"
+    //   },
+    //   {
+    //     id: 2,
+    //     title: "Second Title",
+    //     description: "Test Description",
+    //     priority: "Low"
+    //   },
+    //   {
+    //     id: 3,
+    //     title: "Third Title",
+    //     description: "Test Description",
+    //     priority: "Medium"
+    //   },
+    // ];
+    // setTasks(data)
+  }, [isAdded])
     return (
         <div className='container'>
-            {
-                isCreate && (
-                    <TaskForm></TaskForm>
+        {
+          isCreate && (
+            <TaskForm
+              tasks={tasks} setTasks={setTasks} setIsAdded={setIsAdded}
+              createTask={createTask}
+              title={title} setTitle={setTitle}
+              description={description} setDescription={setDescription}
+              priority={priority} setPriority={setPriority}
+            ></TaskForm>
                 )
             }
             
@@ -24,37 +85,9 @@ const Task = () => {
                         </i></button></h2>
             </div>
             <div className='clearfix'></div>
-            </div>
-            <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Task Title</th>
-          <th>Description</th>
-          <th>Priority</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Test</td>
-          <td>Description</td>
-          <td>High</td>
-                        <td>
-                            
-                                
-                                <i className='fa fa-pencil text-success pointer' title='Edit Task'></i>
-                            
-                            
-                                <i className='fa fa-trash text-danger ms-3 pointer' title='Delete Task'></i>
-                          
-          </td>
-        </tr>
+        </div>
         
-        
-      </tbody>
-    </Table>
+            <TaskList tasks={tasks}></TaskList>
         </div>
     );
 };
