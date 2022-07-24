@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
 
 import './Task.css'
 import TaskForm from '../TaskForm/TaskForm';
@@ -30,7 +29,7 @@ const Task = () => {
       priority,
     }
     const taskData = tasks;
-    taskData.push(taskItem);
+    taskData.unshiftgit (taskItem);
     setTasks(taskData)
     setIsAdded(true)
     setTitle('')
