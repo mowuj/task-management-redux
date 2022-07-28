@@ -2,10 +2,12 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import TaskDetails from '../TaskDetails/TaskDetails';
 
-const TaskList = ({tasks}) => {
+const TaskList = ({ tasks }) => {
+  
     return (
       <div>
         <h2>Task List</h2>
+        
             <Table striped bordered hover>
       <thead>
         <tr>
@@ -17,6 +19,7 @@ const TaskList = ({tasks}) => {
         </tr>
       </thead>
           <tbody>
+            
             {
               tasks?.map((item, index) => (
                 <TaskDetails key={index} item={ item} index={index} />

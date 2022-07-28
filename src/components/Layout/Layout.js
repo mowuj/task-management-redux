@@ -1,14 +1,12 @@
 import React from 'react';
+import Counter from '../Counter/Counter';
 import Task from '../Task/Task';
-import Navbar from '../Navbar/Navbar'
-import Footer from '../Footer/Footer';
-import TaskList from '../TaskList/TaskList';
 const Layout = () => {
     return (
         <div>
-            
+            <Counter></Counter>
             <Task />
-            {/* <TaskList/> */}
+            
             
         </div>
     );

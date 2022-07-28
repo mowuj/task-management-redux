@@ -8,6 +8,7 @@ const TaskDetails = ({item,index}) => {
                 <td>{item?.Title }</td>
                 <td>{ item?.Description}</td>
                 <td>{ item?.Priority}</td>
+                
                         <td>
                             
                                 

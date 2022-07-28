@@ -2,15 +2,52 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { createStore } from 'redux'
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const initalizeSate = {
+  counter: 100,
+
+};
+
+function CounterReducer(state=initalizeSate,action) {
+  switch (action.type) {
+    case 'GET_COUNTER':
+      return {
+        ...state,
+      };
+      break;
+    case 'INCREMENT':
+      return {
+        ...state,
+        counter:state.counter+1
+      };
+      break;
+    case 'DECREMENT':
+      return {
+        ...state,
+        counter:state.counter-1
+      };
+      break;
+
+    default:
+      break;
+  }
+  return state;
+}
+// set a store
+let store = createStore(CounterReducer,
+window.__REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_EXTENSION__());
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+        </Provider>
       </BrowserRouter>
   </React.StrictMode>
 );
