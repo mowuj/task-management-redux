@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react';
-
+import axios from 'axios';
 import './Task.css'
 import TaskForm from '../TaskForm/TaskForm';
 import TaskList from '../TaskList/TaskList';
-import { getTaskData } from '../../services/TaskService';
-import useTaskData from '../../hooks/useTaskData';
+import { getTaskData, storeTaskData } from '../../services/TaskService';
 
 const Task = () => {
     const [isCreate, setIsCreate] = useState(false);
-  const [tasks, setTasks] = useTaskData()
+  const [tasks, setTasks] = useState([])
   const [isAdded, setIsAdded] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState();
-  const createTask = (e) => {
+   useEffect(() => {
+      initializeData()
+    },[])
+    const initializeData=async () => {
+      let data = await getTaskData();
+      data.sort();
+      data.reverse();
+      setTasks(data);
+    }
+  const createTask = async (e) => {
     e.preventDefault();
 
     if (title.length === 0) {
@@ -27,17 +35,24 @@ const Task = () => {
     }
     const taskItem = {
       
-      title,
-      description,
-      priority,
+        Title: title,
+        Description:description,
+        Priority: priority,
+      
     }
-    const taskData = tasks;
-    taskData.unshift(taskItem);
-    setTasks(taskData)
-    setIsAdded(true)
-    setTitle('')
-    setDescription('')
-    setPriority('')
+
+    const isAdded= await storeTaskData(taskItem)
+    if (isAdded) {
+      setIsAdded(true)
+      setTitle('')
+      setDescription('')
+      setPriority('')
+      await initializeData()
+    }
+    else {
+      alert('Something went wrong')
+    }
+    
   }
 
     return (
