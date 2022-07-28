@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react';
 import './Task.css'
 import TaskForm from '../TaskForm/TaskForm';
 import TaskList from '../TaskList/TaskList';
+import { getTaskData } from '../../services/TaskService';
+import useTaskData from '../../hooks/useTaskData';
+
 const Task = () => {
     const [isCreate, setIsCreate] = useState(false);
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useTaskData()
   const [isAdded, setIsAdded] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -29,36 +32,14 @@ const Task = () => {
       priority,
     }
     const taskData = tasks;
-    taskData.unshiftgit (taskItem);
+    taskData.unshift(taskItem);
     setTasks(taskData)
     setIsAdded(true)
     setTitle('')
     setDescription('')
     setPriority('')
   }
-  useEffect(() => {
-    // const data = [
-    //   {
-    //     id: 1,
-    //     title: "First Title",
-    //     description: "Test Description",
-    //     priority: "High"
-    //   },
-    //   {
-    //     id: 2,
-    //     title: "Second Title",
-    //     description: "Test Description",
-    //     priority: "Low"
-    //   },
-    //   {
-    //     id: 3,
-    //     title: "Third Title",
-    //     description: "Test Description",
-    //     priority: "Medium"
-    //   },
-    // ];
-    // setTasks(data)
-  }, [isAdded])
+
     return (
         <div className='container'>
         {

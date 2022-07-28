@@ -4,7 +4,8 @@ import TaskDetails from '../TaskDetails/TaskDetails';
 
 const TaskList = ({tasks}) => {
     return (
-        <div>
+      <div>
+        <h2>Task List</h2>
             <Table striped bordered hover>
       <thead>
         <tr>
@@ -17,7 +18,7 @@ const TaskList = ({tasks}) => {
       </thead>
           <tbody>
             {
-              tasks.map((item, index) => (
+              tasks?.map((item, index) => (
                 <TaskDetails key={index} item={ item} index={index} />
               ))
             }
