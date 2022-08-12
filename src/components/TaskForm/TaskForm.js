@@ -2,9 +2,8 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
-import { getTaskData, storeTaskData } from '../../services/TaskService';
 import { useDispatch } from 'react-redux';
-// {tasks,setTasks,setIsAdded,createTask,title,setTitle,description,setDescription,priority,setPriority}
+import { storeTaskDataAction } from '../redux/actions/TaskAction';
 const TaskForm = () => {
 const dispatch =useDispatch()
   const [title, setTitle] = useState('');
@@ -29,25 +28,16 @@ const dispatch =useDispatch()
         Priority: priority,
       
     }
-    await storeTaskData(taskItem)
-    dispatch({type:'ADD_TASK',payload:taskItem})
-    let data = await getTaskData();
-      data.sort();
-      data.reverse();
-      dispatch({type:"GET_TASKS",payload:data})
-    // const isAdded= await storeTaskData(taskItem)
-    // if (isAdded) {
-    //   // setIsAdded(true)
-      setTitle('')
-      setDescription('')
-      setPriority('')
-    //   alert('Task Added !')
-    //   // await initializeData()
-    // }
-    // else {
-    //   alert('Something went wrong')
-    // }
-    
+    // await storeTaskData(taskItem)
+    dispatch(storeTaskDataAction(taskItem))
+    // let data = await getTaskData();
+    //   data.sort();
+    //   data.reverse();
+    //   dispatch({type:"GET_TASKS",payload:data})
+      // setTitle('')
+      // setDescription('')
+      // setPriority('')
+
   }
     return (
         <div container>

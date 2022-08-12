@@ -2,29 +2,17 @@ import React, { useEffect, useState } from 'react';
 import './Task.css'
 import TaskForm from '../TaskForm/TaskForm';
 import TaskList from '../TaskList/TaskList';
-import { getTaskData, storeTaskData } from '../../services/TaskService';
 import { useDispatch, useSelector } from 'react-redux';
+import { getTaskDataAction } from '../redux/actions/TaskAction';
 
 const Task = () => {
     const [isCreate, setIsCreate] = useState(false);
-  // const [tasks, setTasks] = useState([])
-  // const [isAdded, setIsAdded] = useState(false);
-  // const [title, setTitle] = useState('');
-  // const [description, setDescription] = useState('');
-  // const [priority, setPriority] = useState();
   const dispatch =useDispatch()
   const tasks =useSelector(state=>state.tasks)
   useEffect(() => {
-      initializeData()
+      dispatch(getTaskDataAction())
     },[])
-    const initializeData=async () => {
-      let data = await getTaskData();
-      data.sort();
-      data.reverse();
-      dispatch({type:"GET_TASKS",payload:data})
-      // setTasks(data);
-
-    }
+    
   
 
     return (
