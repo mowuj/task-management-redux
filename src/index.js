@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const initalizeSate = {
   counter: 100,
+  tasks:[]
 
 };
 
@@ -22,9 +23,26 @@ function CounterReducer(state=initalizeSate,action) {
       };
       break;
     case 'INCREMENT':
+      let updateInc = typeof action.payload ==='undefined'? 1:action.payload
+      updateInc=parseInt(updateInc)
       return {
         ...state,
-        counter:state.counter+1
+        counter:state.counter+updateInc
+      };
+    case 'UPDATE':
+      return {
+        ...state,
+        counter:state.counter+parseInt(action.payload)
+      };
+    case 'GET_TASKS':
+      return {
+        ...state,
+        tasks:action.payload
+      };
+    case 'ADD_TASK':
+      return {
+        ...state,
+        
       };
       break;
     case 'DECREMENT':

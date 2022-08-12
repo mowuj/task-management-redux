@@ -4,8 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux';
 function NavScrollExample() {
+    const tasks =useSelector(state=>state.tasks)
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -20,6 +21,9 @@ function NavScrollExample() {
             
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link as={Link} to="/task">Task</Nav.Link>
+            <Nav.Link as={Link} to="">
+              <span className='badge bg-danger'>{ tasks.length}</span>
+            </Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
 
           </Nav>
