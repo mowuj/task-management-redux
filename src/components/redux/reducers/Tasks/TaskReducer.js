@@ -2,6 +2,7 @@ import * as Types from '../../types/types'
 const initializeSate = {
   tasks: [],
   taskForm: {
+    _id:null,
     Title: '',
     Description: '',
     Priority:''
@@ -25,7 +26,13 @@ function TaskReducer(state=initializeSate,action) {
     Title: '',
     Description: '',
     Priority:''
-  },
+  }
+      };
+      break;
+  case Types.GET_TASK_DETAIL:
+      return {
+        ...state,
+    taskForm:action.payload,
       };
       break;
     

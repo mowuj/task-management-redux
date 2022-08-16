@@ -1,3 +1,4 @@
 export const GET_TASKS="GET_TASKS"
+export const GET_TASK_DETAIL="GET_TASK_DETAIL"
 export const ADD_TASKS="ADD_TASKS"
 export const CHANGE_TASK_INPUT="CHANGE_TASK_INPUT"
