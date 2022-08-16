@@ -8,7 +8,7 @@ import { getTaskDataAction } from '../redux/actions/TaskAction';
 const Task = () => {
     const [isCreate, setIsCreate] = useState(false);
   const dispatch =useDispatch()
-  const tasks =useSelector(state=>state.tasks)
+  const tasks =useSelector(state=>state.TaskReducer.tasks)
   useEffect(() => {
       dispatch(getTaskDataAction())
     },[])

@@ -13,12 +13,28 @@ export const getTaskDataAction =()=>(dispatch) => {
     });
 }
 export const storeTaskDataAction =(taskItem)=>(dispatch) => {
+    if (taskItem.Title.length === 0) {
+      alert('Please give a Title !')
+    }
+    if (taskItem.Description.length === 0) {
+      alert('Please give a Description !')
+    }
+    if (taskItem.Priority.length === 0) {
+      alert('Please give a Priority !')
+    }
     axios.post("https://todo-app37.herokuapp.com/addTodo",taskItem )
       .then(res => {
-        dispatch({type:'ADD_TASK',payload:taskItem})
+        dispatch({type: Types.ADD_TASKS,payload:taskItem})
         dispatch(getTaskDataAction())
 
     });
 
     
+}
+export const changeTaskFormAction =(name,value)=>(dispatch) => {
+  const formData = {
+    name: name,
+    value: value,
+  };
+ dispatch({type: Types.CHANGE_TASK_INPUT,payload:formData})
 }

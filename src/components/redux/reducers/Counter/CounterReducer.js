@@ -1,7 +1,6 @@
-import * as Types from '../types/types'
+import * as Types from '../../types/types'
 const initalizeSate = {
   counter: 100,
-  tasks:[]
 
 };
 
@@ -24,17 +23,7 @@ function CounterReducer(state=initalizeSate,action) {
         ...state,
         counter:state.counter+parseInt(action.payload)
       };
-    case Types.GET_TASKS:
-      return {
-        ...state,
-        tasks:action.payload
-      };
-    case Types.GET_TASKS:
-      return {
-        ...state,
-        
-      };
-      break;
+    
     case 'DECREMENT':
       return {
         ...state,

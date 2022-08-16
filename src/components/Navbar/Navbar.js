@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 function NavScrollExample() {
-    const tasks =useSelector(state=>state.tasks)
+    const tasks =useSelector(state=>state.TaskReducer.tasks)
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
